@@ -18,7 +18,13 @@
 
     <table class="table table-stripped">
         <tr>
-            <th>NPM</th><th>Nama</th>
+            <th>NPM</th>
+            <th>Nama</th>
+            <th>Tempat_Lahir</th>
+            <th>Tanggal_Lahir</th>
+            <th>Foto</th>
+            <th>Prodi</th>
+            <th>Fakultas</th>
         </tr>
         @foreach ($mahasiswa as $item)
         <tr>
@@ -27,6 +33,21 @@
             </td>
             <td>
                 {{ $item['nama']}}
+            </td>
+            <td>
+                {{ $item['tempat_lahir']}}
+            </td>
+            <td>
+                {{ $item['tanggal_lahir']}}
+            </td>
+            <td>
+                <img src="images/{{ $item['foto'] }}" class="rounded-circle" width="90px" />
+            </td>
+            <td>
+                {{ $item['prodi']['nama']}}
+            </td>
+            <td>
+                {{ $item['fakultas']['nama']}}
             </td>
         </tr>
         @endforeach

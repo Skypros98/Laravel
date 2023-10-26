@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('foto', 50);
             $table->uuid('prodi_id');
             $table->foreign('prodi_id')->references('id')->on('prodis')->restrictOnDelete()->restrictOnUpdate();
+            $table->uuid('fakultas_id');
+            $table->foreign('fakultas_id')->references('id')->on('fakultas')->restrictOnDelete()->restrictOnUpdate();
             $table->timestamps();
         });
     }
