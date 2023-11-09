@@ -14,6 +14,7 @@
                       <p class="card-description">
                         Daftar Program Studi di Universitas MDP
                       </p>
+                      <a href="{{ route('prodi.create')}}" class="btn btn-primary btn-rounded btn-fw">Tambah</a>
                       <div class="table-responsive">
                         <table class="table table-hover table-striped">
                           <thead>

@@ -21,7 +21,7 @@ class FakultasController extends Controller
      */
     public function create()
     {
-        //
+        return view("fakultas.create");
     }
 
     /**
@@ -29,7 +29,17 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+
+        // validasi data input
+        $validasi = $request->validate([
+            "nama" => "required|unique:fakultas",
+        ]);
+        // simpan data ke tabel fakultas
+        Fakultas::create($validasi);
+
+        // redirect ke fakultas
+        return redirect("fakultas")->with("success", "Data fakultas berhasil disimpan");
     }
 
     /**

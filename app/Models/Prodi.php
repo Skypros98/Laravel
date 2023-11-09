@@ -10,6 +10,7 @@ class Prodi extends Model
 {
     use HasFactory, HasUuids;
     protected $table = 'prodis';
+    protected $fillable = ['nama'];
 
     public function fakultas()
     {
