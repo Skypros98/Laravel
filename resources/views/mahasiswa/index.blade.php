@@ -12,8 +12,9 @@
                     <div class="card-body">
                       <h4 class="card-title">Mahasiswa</h4>
                       <p class="card-description">
-                        Daftar mahasiswa di Universitas MDP
+                        Daftar Mahasiswa di Universitas MDP
                       </p>
+                      <a href="{{ route('mahasiswa.create')}}" class="btn btn-primary btn-rounded btn-fw">Tambah</a>
                       <div class="table-responsive">
                         <table class="table table-hover table-striped">
                           <thead>

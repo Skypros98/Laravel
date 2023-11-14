@@ -23,7 +23,9 @@
                       <label for="fakultas_id">Nama Fakultas</label>
                       <select type="text" class="form-control" name="fakultas_id" placeholder="Nama Fakultas">
                         <option value="">Pilih</option>
-                        {{-- option diambil dari Model Fakultas --}}
+                        @foreach ($fakultas as $item)
+                            <option value="{{ $item->id }}"> {{ $item->nama }} </option>
+                        @endforeach
                       </select>
                       @error('fakultas_id')
                             <label class="text-danger">{{ $message }}</label>

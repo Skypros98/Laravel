@@ -10,10 +10,11 @@ class Mahasiswa extends Model
 {
     use HasFactory, HasUuids;
     protected $table = 'mahasiswas';
+    protected $fillable = ['npm', 'nama', 'tempat_lahir', 'tanggal_lahir', 'foto', 'prodi_id'];
 
     public function prodi()
     {
-        return $this->belongsTo(Prodi::class);
+        return $this->belongsTo(Prodi::class, 'prodi_id', 'id');
     }
     public function fakultas()
     {
