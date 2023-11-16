@@ -11,12 +11,13 @@
                         Formulir tambah Mahasiswa
                     </p>
 
-                    <form class="forms-sample" method="POST" action="{{ route('mahasiswa.store') }}" enctype="multipart/form-data">
+                    <form class="forms-sample" method="POST" action="{{ route('mahasiswa.update', $mahasiswa->id) }}" enctype="multipart/form-data">
                         @csrf
+                        @method('patch')
                         {{-- NPM --}}
                         <div class="form-group">
                             <label for="npm">NPM</label>
-                            <input type="text" class="form-control" name="npm" placeholder="Nomor NPM">
+                            <input type="text" class="form-control" name="npm" placeholder="Nomor NPM" value="{{ $mahasiswa->npm }}">
                             @error('npm')
                                 <label class="text-danger"> {{ $message }}</label>
                             @enderror
@@ -25,7 +26,7 @@
                         {{-- Nama --}}
                         <div class="form-group">
                             <label for="nama">Nama Mahasiswa</label>
-                            <input type="text" class="form-control" name="nama" placeholder="Nama Mahasiswa">
+                            <input type="text" class="form-control" name="nama" placeholder="Nama Mahasiswa" value="{{ $mahasiswa->nama }}">
                             @error('nama')
                                 <label class="text-danger"> {{ $message }}</label>
                             @enderror
@@ -34,7 +35,7 @@
                         {{-- Tempat Lahir --}}
                         <div class="form-group">
                             <label for="tempat_lahir">Tempat Lahir Mahasiswa</label>
-                            <input type="text" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir">
+                            <input type="text" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir" value="{{ $mahasiswa->tempat_lahir }}">
                             @error('tempat_lahir')
                                 <label class="text-danger"> {{ $message }}</label>
                             @enderror
@@ -43,7 +44,7 @@
                         {{-- Tanggal Lahir --}}
                         <div class="form-group">
                             <label for="tanggal_lahir">Tanggal Lahir Mahasiswa</label>
-                            <input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal Lahir">
+                            <input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal Lahir" value="{{ $mahasiswa->tanggal_lahir }}">
                             @error('tanggal_lahir')
                                 <label class="text-danger"> {{ $message }}</label>
                             @enderror
@@ -52,7 +53,7 @@
                         {{-- Foto --}}
                             <div class="form-group">
                                 <label for="foto">Foto Mahasiswa</label>
-                                <input type="file" class="form-control" name="foto" placeholder="Foto Mahasiswa">
+                                <input type="file" class="form-control" name="foto" placeholder="Foto Mahasiswa" value="{{ $mahasiswa->foto }}">
                                 @error('nama')
                                     <label class="text-danger"> {{ $message }}</label>
                                 @enderror
@@ -64,7 +65,12 @@
                             <select name="prodi_id" class="form-control">
                                 <option value="">Pilih</option>
                                 @foreach ($prodi as $item);
-                                    <option value="{{ $item->id }}"> {{ $item->nama }}
+                                    <option value="{{ $item->id }}"
+                                        @if (old('prodi_id', $mahasiswa->prodi_id) == $item('id'))
+                                            selected
+                                        @endif
+                                        >
+                                        {{ $item->nama }}
                                     </option>
                                 @endforeach
                             </select>

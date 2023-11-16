@@ -26,6 +26,7 @@
                                 <th>Foto</th>
                                 <th>Prodi</th>
                                 <th>Fakultas</th>
+                                <th>Aksi</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -50,7 +51,19 @@
                                     {{ $item['prodi']['nama']}}
                                 </td>
                                 <td>
-                                    {{ $item['fakultas']['nama']}}
+                                    {{ $item['prodi']['fakultas']['nama']}}
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="{{ route('mahasiswa.edit', $item->id) }}">
+                                            <button class="btn btn-success btn-sm">Edit</button>
+                                        </a>
+                                        <form method="post" action="{{ route('mahasiswa.destroy', $item->id) }}">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger">Hapus Data</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
@@ -63,3 +76,10 @@
     </div>
 @endsection
 
+@section('scripts')
+    <script>
+            @if (Session::get(''))
+                toastr.success("{{ Session::get('success') }}");
+            @endif
+    </script>
+@endsection
