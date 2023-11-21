@@ -14,19 +14,19 @@
                       <p class="card-description">
                         Daftar Mahasiswa di Universitas MDP
                       </p>
-                      <a href="{{ route('mahasiswa.create')}}" class="btn btn-primary btn-rounded btn-fw">Tambah</a>
+                      <a href="{{ route('mahasiswa.create') }}" class="btn btn-outline-danger btn-icon-text btn-fw"><i class="mdi mdi-upload btn-icon-prepend"></i>Tambah Data</a>
                       <div class="table-responsive">
                         <table class="table table-hover table-striped">
                           <thead>
                             <tr>
                                 <th>NPM</th>
                                 <th>Nama</th>
-                                <th>Tempat_Lahir</th>
-                                <th>Tanggal_Lahir</th>
+                                <th>Tempat Lahir</th>
+                                <th>Tanggal Lahir</th>
                                 <th>Foto</th>
-                                <th>Prodi</th>
-                                <th>Fakultas</th>
-                                <th>Aksi</th>
+                                <th>Nama Prodi</th>
+                                <th>Nama Fakultas</th>
+                                <th class="d-flex justify-content-center">Aksi</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -56,12 +56,12 @@
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a href="{{ route('mahasiswa.edit', $item->id) }}">
-                                            <button class="btn btn-success btn-sm">Edit</button>
+                                            <button class="btn btn-primary btn-sm mx-3">Edit</button>
                                         </a>
-                                        <form method="post" action="{{ route('mahasiswa.destroy', $item->id) }}">
+                                        <form method="POST" action="{{ route('mahasiswa.destroy', $item->id) }}">
                                             @method('delete')
                                             @csrf
-                                            <button type="submit" class="btn btn-danger">Hapus Data</button>
+                                            <button type="submit" class="btn btn-danger btn-sm">Hapus Data</button>
                                         </form>
                                     </div>
                                 </td>

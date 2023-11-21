@@ -92,6 +92,8 @@ class MahasiswaController extends Controller
     public function destroy(Mahasiswa $mahasiswa)
     {
         $mahasiswa->delete();
-        return redirect()->route("mahasiswa.index")->with("success", "Berhasil Dihapus");
+        // return response("Data Sudah Berhasil Di Hapus", 200);
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil dihapus');
     }
 }

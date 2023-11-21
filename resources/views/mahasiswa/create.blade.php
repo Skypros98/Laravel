@@ -64,17 +64,16 @@
                             <select name="prodi_id" class="form-control">
                                 <option value="">Pilih</option>
                                 @foreach ($prodi as $item);
-                                    <option value="{{ $item->id }}"> {{ $item->nama }}
-                                    </option>
+                                    <option value="{{ $item->id }}"> {{ $item->nama }}</option>
                                 @endforeach
                             </select>
-                            @error('prodi_id')
-                                <label class="text-danger">{{ $message }}</label>
-                            @enderror
+                                @error('prodi_id')
+                                    <label class="text-danger">{{ $message }}</label>
+                                @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                        <a href="{{ url('prodi') }}" class="btn btn-light">Cancel</a>
+                        <a href="{{ url('mahasiswa') }}" class="btn btn-light">Cancel</a>
                     </form>
                 </div>
             </div>
