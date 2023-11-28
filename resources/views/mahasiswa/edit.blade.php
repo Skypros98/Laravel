@@ -13,7 +13,7 @@
                     <form class="forms-sample" method="POST" action="{{ route('mahasiswa.update', $mahasiswa->id) }}"
                         enctype="multipart/form-data">
                         @csrf
-                        @method('patch')
+                        @method('PUT')
                         <div class="form-group">
                             <label for="npm">NPM</label>
                             <input type="text" class="form-control" name="npm" placeholder="Nomor Pokok Mahasiswa"
@@ -29,7 +29,8 @@
                             <input type="date" class="form-control" name="tgl_lahir" placeholder="Tanggal Lahir"
                                 value="{{ $mahasiswa->tgl_lahir }}">
                             <label for="foto">Foto</label>
-                            <input type="file" class="form-control" name="foto" placeholder="Foto">
+                            <input type="file" class="form-control" name="foto" placeholder="Foto"
+                                value="{{ $mahasiswa->foto }}">
                             <br>
                             <label for="prodi">Nama Prodi</label>
                             <select name="prodi_id" class="form-control">

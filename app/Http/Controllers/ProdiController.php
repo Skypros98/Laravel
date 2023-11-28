@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fakultas;
+use App\Models\Fakulitas;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
 
@@ -22,8 +22,8 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        $fakultas = Fakultas::all();
-        return view("prodi.create")->with("fakultas", $fakultas);
+        $fakulitas = Fakulitas::all();
+        return view("prodi.create")->with("fakulitas", $fakulitas);
     }
 
     /**
@@ -31,19 +31,14 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-
-        // validasi data input
         $validasi = $request->validate([
             "nama" => "required|unique:prodis",
-            "fakultas_id" => "required"
+            "fakulitas_id" => "required"
         ]);
 
-        // simpan data ke tabel prodi
+        //simpan data ke tabel prodis
         Prodi::create($validasi);
-
-        // redirect ke prodi
-        return redirect("prodi")->with("success", "Data Program Studi berhasil disimpan");
+        return redirect("prodi")->with("success", "Data Prodi berhasil disimpan");
     }
 
     /**
@@ -57,11 +52,10 @@ class ProdiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Prodi $prodi)
     {
-        $prodi = Prodi::find($id);
-
-        return view('prodi.edit')->with('prodi', $prodi);
+        $fakulitas = Fakulitas::all();
+        return view("prodi.edit")->with("fakulitas", $fakulitas)->with("prodi", $prodi);
     }
 
     /**
@@ -71,12 +65,12 @@ class ProdiController extends Controller
     {
         $validasi = $request->validate([
             "nama" => "required",
-            "fakultas_id" => "required"
+            "fakulitas_id" => "required"
         ]);
-
+        // Prodi::all()->update($validasi);
         $prodi->update($validasi);
-
-        return redirect('prodi')->with('success', 'Data prodi berhasil diubah');
+        //atau Prodi::where('id', $prodi->id)->update(validasi);
+        return redirect('prodi')->with('success', 'Data Prodi Berhasil Di Update');
     }
 
     /**
@@ -87,6 +81,9 @@ class ProdiController extends Controller
         $prodi->delete();
         // return response("Data Sudah Berhasil Di Hapus", 200);
 
-        return redirect()->route('prodi.index')->with('success', 'Data Prodi berhasil dihapus');
+        return redirect()->route('prodi.index')->with(
+            'success',
+            'Data telah dihapus.'
+        );
     }
 }

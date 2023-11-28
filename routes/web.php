@@ -1,7 +1,6 @@
-
 <?php
 
-use App\Http\Controllers\FakultasController;
+use App\Http\Controllers\FakulitasController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\ProdiController;
 use Illuminate\Support\Facades\Route;
@@ -21,30 +20,38 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/fakultas', function () {
-//     return view('fakultas');
+Route::middleware('auth')->group(function () {
+    Route::resource('fakulitas', FakulitasController::class);
+    Route::resource('prodi', ProdiController::class);
+    Route::resource('mahasiswa', MahasiswaController::class);
+});
+
+
+// Route::get('/fakulitas', function () {
+//     return view('fakulitas');
 // });
-Route::resource(
-    'fakultas',
-    FakultasController::class
-);
+// Route::resource(
+//     'fakulitas',
+//     FakulitasController::class
+// );
 
 // Route::get('/prodi', function () {
 //     return view('prodi');
 // });
-Route::resource(
-    'prodi',
-    ProdiController::class
-);
 
 // Route::get('/mahasiswa', function () {
 //     $data = [
-//         ["npm" => 2226250001, "nama" => "Ahmad"],
-//         ["npm" => 2226250002, "nama" => "Kareem"]
+//         ["npm" => 2226250101, "nama" => "Dewa"],
+//         ["npm" => 2226250100, "nama" => "Reno"]
 //     ];
 //     return view('mahasiswa.index')->with('mahasiswa', $data);
 // });
-Route::resource(
-    'mahasiswa',
-    MahasiswaController::class
-);
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
