@@ -21,7 +21,7 @@ class FakultasController extends Controller
      */
     public function create()
     {
-        return view("fakultas.create");
+        return view ("fakultas.create");
     }
 
     /**
@@ -31,15 +31,14 @@ class FakultasController extends Controller
     {
         // dd($request);
 
-        // validasi data input
+        // Validasi data Input
         $validasi = $request->validate([
             "nama" => "required|unique:fakultas",
         ]);
-        // simpan data ke tabel fakultas
+        //  Simpan data ke tabel fakultas
         Fakultas::create($validasi);
 
-        // redirect ke fakultas
-        return redirect("fakultas")->with("success", "Data fakultas berhasil disimpan");
+        return redirect("fakultas")->with("success", "Data fakultas berhasil disimpan!");
     }
 
     /**
@@ -56,21 +55,20 @@ class FakultasController extends Controller
     public function edit($id)
     {
         $fakultas = Fakultas::find($id);
-
-        return view('fakultas.edit')->with('fakultas', $fakultas);
+        return view("fakultas.edit")->with("fakultas", $fakultas);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(request $request, $id)
+    public function update(Request $request, $id)
     {
         $validasi = $request->validate([
-            "nama" => "required"
+            "nama"=> "required",
         ]);
         Fakultas::find($id)->update($validasi);
 
-        return redirect('fakultas')->with('Data fakultas berhasil diubah');
+        return redirect("fakultas")->with("success","Data Fakultas Berhasil di Ubah");
     }
 
     /**
@@ -79,8 +77,7 @@ class FakultasController extends Controller
     public function destroy($id)
     {
         $fakultas = Fakultas::find($id);
-
         $fakultas->delete();
-        return redirect('fakultas')->with('success', 'Data fakultas berhasil dihapus');
+        return redirect("fakultas")->with("success","Data Fakultas Berhasil di Hapus");
     }
 }

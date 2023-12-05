@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\FakulitasController;
+use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\ProdiController;
 use Illuminate\Support\Facades\Route;
@@ -20,38 +20,49 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route :: get('/fakultas', function () {
+//     return view('fakultas');
+// });
+
 Route::middleware('auth')->group(function () {
-    Route::resource('fakulitas', FakulitasController::class);
+    Route::resource('fakultas', FakultasController::class);
     Route::resource('prodi', ProdiController::class);
     Route::resource('mahasiswa', MahasiswaController::class);
 });
 
+// Route::resource('fakultas',
+// FakultasController::class);
 
-// Route::get('/fakulitas', function () {
-//     return view('fakulitas');
-// });
-// Route::resource(
-//     'fakulitas',
-//     FakulitasController::class
-// );
-
-// Route::get('/prodi', function () {
+// Route :: get('/prodi', function () {
 //     return view('prodi');
 // });
 
-// Route::get('/mahasiswa', function () {
-//     $data = [
-//         ["npm" => 2226250101, "nama" => "Dewa"],
-//         ["npm" => 2226250100, "nama" => "Reno"]
+// Route :: get('/mahasiswa', function () {
+//     $data  = [
+//         ["npm" => 2226250067, "nama" => "Dzakwan"],
+//         ["npm" => 2226250094, "nama" => "Devita"]
 //     ];
-//     return view('mahasiswa.index')->with('mahasiswa', $data);
+//         return view ('mahasiswa.index')->with('mahasiswa', $data);
 // });
 
-
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['checkRole:A'])->name('home');
+
+// Admin
+Route::middleware(['auth', 'checkRole:A'])->group(function () {
+    Route::resource('fakultas', FakultasController::class);
+    Route::resource('prodi', ProdiController::class);
+    Route::resource('mahasiswa', MahasiswaController::class);
+});
+
+// User
+Route::middleware(['auth', 'checkRole:U'])->group(function () {
+    Route::get('/fakultas', [FakultasController::class, 'index'])->name('fakultas.index');
+});

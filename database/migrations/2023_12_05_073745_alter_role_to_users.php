@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fakulitas', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->primary('id');
-            $table->string('nama', 50);
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->enum('role', ['A', 'U'])->default('U')->after('password');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fakulitas');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

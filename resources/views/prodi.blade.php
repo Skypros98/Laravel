@@ -1,9 +1,8 @@
-@extends('layout.main')
-@section('title', 'prodi')
+@extends('Layout.main')
+@section('title', 'Prodi')
 
 @section('content')
-    <center>
-        <h1>Halaman Prodi</h1>
-        <p>ini adalah halaman prodi</p>
-    </center>
+<center>
+    <h1>Halaman Program Studi</h1>
+</center>
 @endsection
