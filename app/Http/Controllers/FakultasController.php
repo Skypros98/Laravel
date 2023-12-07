@@ -16,12 +16,17 @@ class FakultasController extends Controller
         return view("fakultas.index")->with("fakultas", $fakultas);
     }
 
+    public function __construct()
+    {
+        $this->middleware('checkRole:A')->except('index');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view ("fakultas.create");
+        return view("fakultas.create");
     }
 
     /**
@@ -64,11 +69,11 @@ class FakultasController extends Controller
     public function update(Request $request, $id)
     {
         $validasi = $request->validate([
-            "nama"=> "required",
+            "nama" => "required",
         ]);
         Fakultas::find($id)->update($validasi);
 
-        return redirect("fakultas")->with("success","Data Fakultas Berhasil di Ubah");
+        return redirect("fakultas")->with("success", "Data Fakultas Berhasil di Ubah");
     }
 
     /**
@@ -78,6 +83,6 @@ class FakultasController extends Controller
     {
         $fakultas = Fakultas::find($id);
         $fakultas->delete();
-        return redirect("fakultas")->with("success","Data Fakultas Berhasil di Hapus");
+        return redirect("fakultas")->with("success", "Data Fakultas Berhasil di Hapus");
     }
 }

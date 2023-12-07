@@ -23,7 +23,7 @@ class ProdiController extends Controller
     public function create()
     {
         $fakultas = Fakultas::all();
-        return view ("prodi.create")->with("fakultas", $fakultas);
+        return view("prodi.create")->with("fakultas", $fakultas);
     }
 
     /**
@@ -31,13 +31,15 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Prodi::class);
+
         $validasi = $request->validate([
             "nama" => "required|unique:prodis",
             "fakultas_id" => "required"
         ]);
 
         Prodi::create($validasi);
-        return redirect("prodi")->with("success","Data Prodi Berhasil di Simpan!");
+        return redirect("prodi")->with("success", "Data Prodi Berhasil di Simpan!");
     }
 
     /**
@@ -53,8 +55,8 @@ class ProdiController extends Controller
      */
     public function edit(Prodi $prodi)
     {
-       $fakultas = Fakultas::all();
-       return view("prodi.edit")->with("prodi", $prodi)->with("fakultas", $fakultas);
+        $fakultas = Fakultas::all();
+        return view("prodi.edit")->with("prodi", $prodi)->with("fakultas", $fakultas);
     }
 
     /**
@@ -63,12 +65,12 @@ class ProdiController extends Controller
     public function update(Request $request, Prodi $prodi)
     {
         $validasi = $request->validate([
-            "nama"=> "required",
-            "fakultas_id"=> "required"
+            "nama" => "required",
+            "fakultas_id" => "required"
         ]);
 
         $prodi->update($validasi);
-        return redirect("prodi")->with("success","Data Prodi barhasil diubah");
+        return redirect("prodi")->with("success", "Data Prodi barhasil diubah");
     }
 
     /**
@@ -77,6 +79,6 @@ class ProdiController extends Controller
     public function destroy(Prodi $prodi)
     {
         $prodi->delete();
-        return redirect()->route("prodi.index")->with("success","Berhasil dihapus");
+        return redirect()->route("prodi.index")->with("success", "Berhasil dihapus");
     }
 }

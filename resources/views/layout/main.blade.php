@@ -260,7 +260,7 @@
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                <img src="https://avatarfiles.alphacoders.com/344/344739.png" alt="profile"/>
+                <img src="https://i.pinimg.com/736x/30/e9/b6/30e9b625475569ec102a5a4ba1d6e305.jpg" alt="profile"/>
                 <span class="nav-profile-name">{{ Auth::user()->name}}</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">

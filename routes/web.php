@@ -24,10 +24,10 @@ Route::get('/', function () {
 //     return view('fakultas');
 // });
 
-Route::middleware('auth')->group(function () {
-    Route::resource('fakultas', FakultasController::class);
-    Route::resource('prodi', ProdiController::class);
-    Route::resource('mahasiswa', MahasiswaController::class);
+Route::middleware('auth')->group(function(){
+    Route::resource('fakultas',FakultasController::class);
+    Route::resource('prodi',ProdiController::class);
+    Route::resource('mahasiswa',MahasiswaController::class);
 });
 
 // Route::resource('fakultas',
@@ -53,16 +53,4 @@ Auth::routes();
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['checkRole:A'])->name('home');
-
-// Admin
-Route::middleware(['auth', 'checkRole:A'])->group(function () {
-    Route::resource('fakultas', FakultasController::class);
-    Route::resource('prodi', ProdiController::class);
-    Route::resource('mahasiswa', MahasiswaController::class);
-});
-
-// User
-Route::middleware(['auth', 'checkRole:U'])->group(function () {
-    Route::get('/fakultas', [FakultasController::class, 'index'])->name('fakultas.index');
-});
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

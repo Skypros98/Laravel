@@ -11,7 +11,11 @@
                     <p class="card-description">
                         Daftar Fakultas di Universitas MDP
                     </p>
+
+                    @if (Auth::user()->role == 'A')
                     <a href="{{ route('fakultas.create') }}" class="btn btn-primary btn-rounded btn-fw">Tambah</a>
+                    @endif
+
                     <div class="table-responsive">
                         <table class="table">
                             <tbody>

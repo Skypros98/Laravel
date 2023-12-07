@@ -13,7 +13,11 @@
                     <p class="card-description">
                         Daftar Program Studi
                     </p>
+
+                    @can('create', App\Prodi::class)
                     <a href="{{ route('prodi.create') }}" class="btn btn-primary btn-rounded btn-fw">Tambah</a>
+                    @endcan
+
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
