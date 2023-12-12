@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Fakultas;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProdiController extends Controller
 {
@@ -13,8 +14,8 @@ class ProdiController extends Controller
      */
     public function index()
     {
-        $prodi = Prodi::all();
-        return view("prodi.index")->with("prodi", $prodi);
+        $prodi = Prodi::with('fakultas')->get();
+        return response()->json($prodi, Response::HTTP_OK);
     }
 
     /**

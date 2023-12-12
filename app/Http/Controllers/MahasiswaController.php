@@ -6,6 +6,7 @@ use App\Models\Fakultas;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class MahasiswaController extends Controller
 {
@@ -14,8 +15,8 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $mahasiswa = Mahasiswa::all();
-        return view("mahasiswa.index")->with("mahasiswa", $mahasiswa);
+        $mahasiswa = Mahasiswa::with('prodi.fakultas')->get();
+        return response()->json($mahasiswa, Response::HTTP_OK);
     }
 
     /**
@@ -25,7 +26,7 @@ class MahasiswaController extends Controller
     {
         $fakultas = Fakultas::all();
         $prodi = Prodi::all();
-        return view ("mahasiswa.create")->with("prodi",$prodi);
+        return view("mahasiswa.create")->with("prodi", $prodi);
     }
 
     /**
@@ -45,13 +46,13 @@ class MahasiswaController extends Controller
         //ambil extensi file foto
         $ext = $request->foto->getClientOriginalExtension();
         //rename file to npm.extensi
-        $validasi["foto"] = $request->npm.".".$ext;
+        $validasi["foto"] = $request->npm . "." . $ext;
         //upload foto kedalam folder public
         $request->foto->move(public_path('foto'), $validasi["foto"]);
 
         //simpan data
         Mahasiswa::create($validasi);
-        return redirect("mahasiswa")->with("success","Data Mahasiswa Berhasil di Simpan!");
+        return redirect("mahasiswa")->with("success", "Data Mahasiswa Berhasil di Simpan!");
     }
 
     /**
@@ -87,13 +88,13 @@ class MahasiswaController extends Controller
         //ambil extensi file foto
         $ext = $request->foto->getClientOriginalExtension();
         //rename file to npm.extensi
-        $validasi["foto"] = $request->npm.".".$ext;
+        $validasi["foto"] = $request->npm . "." . $ext;
         //upload foto kedalam folder public
         $request->foto->move(public_path('foto'), $validasi["foto"]);
 
         //simpan data
         $mahasiswa->update($validasi);
-        return redirect("mahasiswa")->with("success","Data Mahasiswa Berhasil di Simpan!");
+        return redirect("mahasiswa")->with("success", "Data Mahasiswa Berhasil di Simpan!");
     }
 
     /**
@@ -102,6 +103,6 @@ class MahasiswaController extends Controller
     public function destroy(Mahasiswa $mahasiswa)
     {
         $mahasiswa->delete();
-        return redirect()->route("mahasiswa.index")->with("success","Berhasil dihapus");
+        return redirect()->route("mahasiswa.index")->with("success", "Berhasil dihapus");
     }
 }
