@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\API\FakultasController as APIFakultasController;
-use App\Http\Controllers\FakultasController;
-use App\Http\Controllers\MahasiswaController;
-use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\API\FakultasController;
+use App\Http\Controllers\API\MahasiswaController;
+use App\Http\Controllers\API\ProdiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +26,10 @@ Route::get('fakultas', [FakultasController::class, 'index']);
 Route::get('prodi', [ProdiController::class, 'index']);
 Route::get('mahasiswa', [MahasiswaController::class, 'index']);
 
+Route::patch('fakultas/{id}', [FakultasController::class, 'update']);
 
-Route::post('fakultas', [APIFakultasController::class, 'store']);
+Route::delete('fakultas/{id}', [FakultasController::class, 'destroy']);
+
+Route::post('fakultas', [FakultasController::class, 'store']);
+Route::post('prodi', [ProdiController::class, 'store']);
+Route::post('mahasiswa', [MahasiswaController::class, 'store']);
